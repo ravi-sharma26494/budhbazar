@@ -1,19 +1,33 @@
-import React from "react";
-import "./button.styles.scss";
+import {
+  BaseButton,
+  GoogleSignInButton,
+  InvertedButton,
+} from "./button.styles";
 
-const BUTTON_TYPES_CLASSES = {
+export const BUTTON_TYPE_CLASSES = {
+  base: "base",
   google: "google-sign-in",
   inverted: "inverted",
 };
-const Button = ({ children, buttonType, ...otherprops }) => {
-  return (
-    <button
-      className={`button-container ${BUTTON_TYPES_CLASSES[buttonType]}`}
-      {...otherprops}
-    >
-      {children}
-    </button>
-  );
+
+const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) =>
+  ({
+    [BUTTON_TYPE_CLASSES.base]: BaseButton,
+    [BUTTON_TYPE_CLASSES.google]: GoogleSignInButton,
+    [BUTTON_TYPE_CLASSES.inverted]: InvertedButton,
+  }[buttonType]);
+
+const Button = ({ children, buttonType, ...otherProps }) => {
+  const CustomButton = getButton(buttonType); // Ensure getButton is defined and working
+
+  // Make sure CustomButton is defined before rendering
+  if (!CustomButton) {
+    console.log(`CustomButton not found for buttonType: ${buttonType}`);
+    return null; // Return null or a default component/error message
+  }
+
+  // Render the CustomButton with the provided props
+  return <CustomButton {...otherProps}>{children}</CustomButton>;
 };
 
 export default Button;

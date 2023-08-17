@@ -1,28 +1,33 @@
-$sub-color: grey;
-$main-color: black;
+import styled , {css} from 'styled-components';
 
-@mixin shrinkLabel {
+const subColor ='grey';
+const mailColor ='black';
+
+const shrinkLabelStyles = css`
     top: -14px;
     font-size: 12px;
-    color: $main-color;
-}
-
-.group {
-    position: relative;
-    margin: 45px 0;
-
-    .form-input {
-        background: none;
+    color: ${mailColor};    
+`
+const FormInputLabel = styled.label`
+            background: none;
         background-color: white;
-        color: $sub-color;
+        color: ${subColor};
         font-size: 18px;
         padding: 10px 10px 10px 5px;
         display: block;
         width: 100%;
         border: none;
         border-radius: 0;
-        border-bottom: 1px solid $sub-color;
+        border-bottom: 1px solid ${subColor};
         margin: 25px 0;
+`
+
+.group {
+    position: relative;
+    margin: 45px 0;
+
+    .form-input {
+
 
         &:focus {
             outline: none;
