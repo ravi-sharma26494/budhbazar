@@ -14,8 +14,6 @@ export const USER_ACTION_TYPES = {
 };
 
 const userReducer = (state, action) => {
-  console.log("dispatched");
-  console.log(action);
   const { type, payload } = action;
   switch (type) {
     case USER_ACTION_TYPES.SET_CURRENT_USER:
@@ -50,7 +48,6 @@ export const UserProvider = ({ children }) => {
         createUserDocumentFromAuth(user);
       }
       setCurrentUser(user);
-      // console.log(user);
     });
     return unsubscribe;
   }, []);
