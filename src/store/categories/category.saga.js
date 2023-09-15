@@ -6,15 +6,14 @@ import {
 } from "./category.action";
 import { CATEGORIES_ACTION_TYPES } from "./category.types";
 
-export const fetchCategoriesAsync = () => async (dispatch) => {
-  dispatch(fetchCategoriesStart());
+export function* fetchCategoriesAsync() {
   try {
-    const categoriesArray = await getCategoriesAndDocuments("categories");
-    dispatch(fetchCategoriesSuccess(categoriesArray));
+    const categoriesArray = yield call(getCategoriesAndDocuments, "categories");
+    yield put(fetchCategoriesSuccess(categoriesArray));
   } catch (error) {
-    dispatch(fetchCategoriesFailed(error));
+    yield put(fetchCategoriesFailed(error));
   }
-};
+}
 
 export function* onFetchCategories() {
   yield takeLatest(
